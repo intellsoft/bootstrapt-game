@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bootstrap Quest | بازی آموزش Bootstrap 5 - اینتل سافت</title>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{--p:#7952b3;--pl:#bd93f9;--s:#0d6efd;--a:#ffc107;--ok:#198754;--w:#fdcb6e;--d:#dc3545;--dk:#212529;--dkr:#1a1a2e;--l:#dfe6e9;--wh:#fff;--bg:linear-gradient(135deg,#1a1a2e,#16213e,#0f3460);--cb:rgba(255,255,255,.05);--cbr:rgba(255,255,255,.1);--gl:0 0 20px rgba(121,82,179,.3);--r:16px;--rs:10px;--tr:all .3s cubic-bezier(.4,0,.2,1)}
+html{scroll-behavior:smooth}
+body{font-family:'Segoe UI',Tahoma,sans-serif;background:var(--bg);color:var(--wh);min-height:100vh;overflow-x:hidden;line-height:1.8}
+.bg-p{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;overflow:hidden}
+.pt{position:absolute;width:4px;height:4px;background:var(--pl);border-radius:50%;animation:fp linear infinite;opacity:.3}
+@keyframes fp{0%{transform:translateY(100vh);opacity:0}10%{opacity:.3}90%{opacity:.3}100%{transform:translateY(-10vh);opacity:0}}
+.hd{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(26,26,46,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--cbr);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.lg{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--wh)}
+.lg-i{width:38px;height:38px;background:linear-gradient(135deg,var(--p),var(--s));border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:bold;color:#fff}
+.lg-t{font-size:1rem;font-weight:700}.lg-t span{color:var(--pl)}
+.hs{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.sb{display:flex;align-items:center;gap:5px;background:var(--cb);border:1px solid var(--cbr);padding:5px 12px;border-radius:18px;font-size:.78rem}
+.sl{color:var(--pl);text-decoration:none;font-size:.78rem;padding:5px 14px;border:1px solid var(--pl);border-radius:18px;transition:var(--tr)}
+.sl:hover{background:var(--pl);color:var(--dk)}
+.ct{position:relative;z-index:1;max-width:1200px;margin:0 auto;padding:90px 16px 30px}
+.sc{display:none;animation:fi .4s ease}.sc.active{display:block}
+@keyframes fi{from{opacity:0;transform:translateY(15px)}to{opacity:1;transform:translateY(0)}}
+.wm{text-align:center;padding:40px 16px}
+.wm-t{font-size:clamp(1.8rem,5vw,3rem);font-weight:900;margin-bottom:14px;background:linear-gradient(135deg,var(--pl),var(--s),var(--a));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.wm-s{font-size:clamp(.9rem,2vw,1.1rem);color:var(--l);margin-bottom:30px;max-width:650px;margin-left:auto;margin-right:auto}
+.wf{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:30px;text-align:right}
+.fc{background:var(--cb);border:1px solid var(--cbr);border-radius:var(--r);padding:18px;transition:var(--tr)}
+.fc:hover{transform:translateY(-3px);border-color:var(--p);box-shadow:var(--gl)}
+.fc .ic{font-size:1.6rem;margin-bottom:8px}.fc h3{font-size:.95rem;margin-bottom:5px;color:var(--pl)}.fc p{font-size:.82rem;color:var(--l);opacity:.8}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:12px 28px;border:none;border-radius:10px;font-size:1rem;font-weight:600;cursor:pointer;transition:var(--tr);font-family:inherit}
+.bp{background:linear-gradient(135deg,var(--p),var(--s));color:var(--wh);box-shadow:0 4px 15px rgba(121,82,179,.4)}
+.bp:hover{transform:translateY(-2px);box-shadow:0 6px 25px rgba(121,82,179,.6)}
+.bs{background:var(--cb);color:var(--wh);border:1px solid var(--cbr)}
+.bs:hover{border-color:var(--pl);color:var(--pl)}
+.bd{background:rgba(220,53,69,.15);color:var(--d);border:1px solid rgba(220,53,69,.3)}
+.bd:hover{background:rgba(220,53,69,.3)}
+.bsm{padding:7px 16px;font-size:.85rem;border-radius:8px}
+.lg2{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px;margin-top:16px}
+.lc{background:var(--cb);border:1px solid var(--cbr);border-radius:var(--r);padding:20px;cursor:pointer;transition:var(--tr);position:relative;overflow:hidden}
+.lc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--p),var(--s));transform:scaleX(0);transition:var(--tr)}
+.lc:hover::before{transform:scaleX(1)}
+.lc:hover{transform:translateY(-3px);box-shadow:var(--gl);border-color:var(--p)}
+.lc.lk{opacity:.45;cursor:not-allowed}.lc.lk:hover{transform:none;box-shadow:none}
+.lc.done{border-color:var(--ok)}
+.lc.done::after{content:'\2705';position:absolute;top:12px;left:12px;font-size:1.2rem}
+.ln{width:40px;height:40px;background:linear-gradient(135deg,var(--p),var(--s));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;margin-bottom:10px}
+.lc h3{font-size:1rem;margin-bottom:5px}.lc p{font-size:.8rem;color:var(--l);opacity:.7}
+.lp{margin-top:10px;height:5px;background:rgba(255,255,255,.1);border-radius:3px;overflow:hidden}
+.lpb{height:100%;background:linear-gradient(90deg,var(--ok),var(--s));border-radius:3px;transition:width .5s}
+.gl{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
+@media(max-width:900px){.gl{grid-template-columns:1fr}}
+.gp{background:var(--cb);border:1px solid var(--cbr);border-radius:var(--r);overflow:hidden}
+.ph{padding:12px 16px;border-bottom:1px solid var(--cbr);display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.02)}
+.ph h3{font-size:.9rem;display:flex;align-items:center;gap:6px}
+.pb{padding:16px}
+.ci{background:var(--cb);border:1px solid var(--cbr);border-radius:var(--r);padding:18px;margin-bottom:16px}
+.cb2{display:inline-flex;align-items:center;gap:5px;background:rgba(121,82,179,.2);color:var(--pl);padding:3px 10px;border-radius:16px;font-size:.75rem;margin-bottom:8px}
+.ci h2{font-size:1.2rem;margin-bottom:8px}.ci p{color:var(--l);opacity:.85;font-size:.88rem;line-height:1.9}
+.hb{margin-top:12px;padding:10px 14px;background:rgba(253,203,110,.1);border:1px solid rgba(253,203,110,.3);border-radius:var(--rs);font-size:.84rem;color:var(--w);display:none}
+.hb.show{display:block;animation:fi .3s}
+.ce{width:100%;min-height:160px;background:rgba(0,0,0,.3);border:1px solid var(--cbr);border-radius:var(--rs);padding:12px;color:#a8e6cf;font-family:'Courier New',monospace;font-size:.88rem;line-height:1.7;resize:vertical;direction:ltr;text-align:left;outline:none;transition:var(--tr)}
+.ce:focus{border-color:var(--p);box-shadow:0 0 0 3px rgba(121,82,179,.2)}
+.ce::placeholder{color:rgba(255,255,255,.3)}
+.pf{width:100%;min-height:160px;background:var(--wh);border-radius:var(--rs);padding:16px;color:var(--dk);direction:ltr;display:flex;align-items:center;justify-content:center;font-family:system-ui,sans-serif}
+.db{padding:10px 20px;background:#7952b3;color:white;font-weight:bold;border-radius:8px;transition:all .3s;font-size:.9rem}
+.qo{display:grid;gap:8px;margin-top:12px}
+.qop{padding:11px 16px;background:rgba(255,255,255,.05);border:2px solid var(--cbr);border-radius:var(--rs);cursor:pointer;transition:var(--tr);font-size:.85rem;direction:ltr;text-align:left;font-family:'Courier New',monospace}
+.qop:hover{border-color:var(--p);background:rgba(121,82,179,.1)}
+.qop.sel{border-color:var(--p);background:rgba(121,82,179,.15)}
+.qop.cor{border-color:var(--ok)!important;background:rgba(25,135,84,.15)!important;color:var(--ok)!important}
+.qop.wrg{border-color:var(--d)!important;background:rgba(220,53,69,.15)!important;color:var(--d)!important}
+.qop.dis{pointer-events:none;opacity:.7}
+.gpr{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.ptr{flex:1;height:7px;background:rgba(255,255,255,.1);border-radius:4px;overflow:hidden}
+.pfl{height:100%;background:linear-gradient(90deg,var(--p),var(--s));border-radius:4px;transition:width .5s}
+.ptx{font-size:.8rem;color:var(--l);white-space:nowrap}
+.fb{padding:12px 16px;border-radius:var(--rs);margin-top:12px;display:none;animation:fi .3s;font-size:.88rem;line-height:1.9}
+.fb.show{display:block}
+.fb.suc{background:rgba(25,135,84,.15);border:1px solid rgba(25,135,84,.3);color:var(--ok)}
+.fb.err{background:rgba(220,53,69,.15);border:1px solid rgba(220,53,69,.3);color:var(--d)}
+.rc{text-align:center;padding:40px 24px;background:var(--cb);border:1px solid var(--cbr);border-radius:var(--r);max-width:480px;margin:30px auto}
+.ri{font-size:3rem;margin-bottom:14px}.rc h2{font-size:1.5rem;margin-bottom:8px}
+.rs2{font-size:2.5rem;font-weight:900;background:linear-gradient(135deg,var(--w),var(--a));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin:14px 0}
+.sts{font-size:2rem;margin:12px 0}.st{opacity:.3;transition:var(--tr)}.st.ea{opacity:1;animation:sp .5s}
+@keyframes sp{0%{transform:scale(0)}50%{transform:scale(1.3)}100%{transform:scale(1)}}
+.xb{width:100%;max-width:280px;height:10px;background:rgba(255,255,255,.1);border-radius:5px;margin:8px auto;overflow:hidden}
+.xf{height:100%;background:linear-gradient(90deg,var(--w),var(--a));border-radius:5px;transition:width 1s}
+.ft{text-align:center;padding:24px 16px;border-top:1px solid var(--cbr);margin-top:50px;color:var(--l);opacity:.7;font-size:.8rem}
+.ft a{color:var(--pl);text-decoration:none}.ft a:hover{text-decoration:underline}
+.cc{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:9999}
+.cp{position:absolute;width:10px;height:10px;top:-10px;animation:cf 3s ease-in forwards}
+@keyframes cf{0%{transform:translateY(0) rotate(0);opacity:1}100%{transform:translateY(100vh) rotate(720deg);opacity:0}}
+.tst{position:fixed;top:70px;left:50%;transform:translateX(-50%) translateY(-100px);background:rgba(25,135,84,.95);color:white;padding:12px 24px;border-radius:10px;font-size:.9rem;font-weight:600;z-index:10000;transition:transform .5s cubic-bezier(.68,-.55,.265,1.55)}
+.tst.show{transform:translateX(-50%) translateY(0)}
+@keyframes shk{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.shk{animation:shk .4s}
+.lcat{margin-top:24px;margin-bottom:8px;font-size:1rem;color:var(--pl);font-weight:700;display:flex;align-items:center;gap:7px}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:20px 0}
+.stat-card{background:var(--cb);border:1px solid var(--cbr);border-radius:var(--rs);padding:16px;text-align:center}
+.stat-card .num{font-size:1.6rem;font-weight:900;color:var(--pl)}
+.stat-card .lbl{font-size:.75rem;color:var(--l);opacity:.7;margin-top:4px}
+.reset-area{margin-top:20px;text-align:center;padding-top:16px;border-top:1px solid var(--cbr)}
+::-webkit-scrollbar{width:7px}::-webkit-scrollbar-track{background:var(--dkr)}::-webkit-scrollbar-thumb{background:var(--p);border-radius:4px}
+@media(max-width:768px){.hd{padding:8px 12px}.hs{gap:6px}.sb{padding:3px 8px;font-size:.7rem}.ct{padding:75px 10px 24px}.wm{padding:24px 8px}.lg2{grid-template-columns:1fr}.btn{padding:10px 20px;font-size:.9rem}.pb{padding:12px}}
+@media(max-width:480px){.lg-t{font-size:.85rem}.sl{display:none}.wm-t{font-size:1.6rem}}
+</style>
+</head>
+<body>
+<div class="bg-p" id="particles"></div>
+<div class="tst" id="toast"></div>
+<div class="cc" id="confetti"></div>
+<header class="hd">
+<a href="https://intellsoft.ir" target="_blank" class="lg"><div class="lg-i">B5</div><div class="lg-t">اینتل <span>سافت</span></div></a>
+<div class="hs">
+<div class="sb"><span>⭐</span><span id="totalScore">0</span></div>
+<div class="sb"><span>🔥</span><span id="streak">0</span> روز</div>
+<div class="sb"><span>🏆</span><span id="badge">مبتدی</span></div>
+<div class="sb"><span>📊</span><span id="doneCount">0</span>/25</div>
+<a href="https://intellsoft.ir" target="_blank" class="sl">🌐 intellsoft.ir</a>
+</div>
+</header>
+<div class="ct">
+<div class="sc active" id="welcomeScreen">
+<div class="wm">
+<h1 class="wm-t">🎨 Bootstrap Quest</h1>
+<p class="wm-s">جامع‌ترین بازی آموزش Bootstrap 5 فارسی! ۲۵ مرحله • ۱۷۵+ چالش • از Grid System تا Components پیشرفته — بر اساس سرفصل‌های W3Schools — پیشرفت شما ذخیره می‌شود.</p>
+<div class="stats-grid" id="welcomeStats"></div>
+<div class="wf">
+<div class="fc"><div class="ic">📚</div><h3>۲۵ مرحله جامع</h3><p>پوشش ۱۰۰٪ سرفصل‌های W3Schools Bootstrap 5</p></div>
+<div class="fc"><div class="ic">💾</div><h3>ذخیره خودکار</h3><p>پیشرفت شما در مرورگر ذخیره می‌شود</p></div>
+<div class="fc"><div class="ic">🏆</div><h3>سیستم رتبه‌بندی</h3><p>امتیاز، ستاره، XP و نشان</p></div>
+<div class="fc"><div class="ic">📱</div><h3>رسپانسیو</h3><p>موبایل، تبلت و دسکتاپ</p></div>
+</div>
+<button class="btn bp" id="startBtn">🚀 شروع / ادامه بازی</button>
+</div>
+</div>
+<div class="sc" id="levelScreen">
+<h2 style="font-size:1.4rem;margin-bottom:5px">📚 انتخاب مرحله</h2>
+<p style="color:var(--l);opacity:.7;font-size:.85rem">پیشرفت شما ذخیره شده • <span id="levelProgressText"></span></p>
+<div id="levelsContainer"></div>
+<div class="reset-area"><button class="btn bsm bd" id="resetBtn">🗑️ پاک کردن پیشرفت</button></div>
+<div style="margin-top:16px;text-align:center"><button class="btn bs" id="backToWelcome">← بازگشت</button></div>
+</div>
+<div class="sc" id="gameScreen">
+<div class="gpr"><span class="ptx" id="chCounter"></span><div class="ptr"><div class="pfl" id="gpf" style="width:0%"></div></div></div>
+<div class="ci" id="chInfo"><div class="cb2" id="chBadge"></div><h2 id="chTitle"></h2><p id="chDesc"></p><div class="hb" id="hintBox"></div><button class="btn bsm bs" id="hintBtn" style="margin-top:8px">💡 راهنمایی</button></div>
+<div class="gl">
+<div class="gp"><div class="ph"><h3>✏️ پاسخ</h3><button class="btn bsm bp" id="submitBtn">بررسی ✓</button></div><div class="pb"><div id="quizArea"></div><textarea class="ce" id="codeEditor" placeholder="<!-- کد Bootstrap را بنویسید -->" style="display:none"></textarea></div></div>
+<div class="gp"><div class="ph"><h3>👁️ پیش‌نمایش</h3></div><div class="pb"><div class="pf"><div class="db" id="demoBox">BS5</div></div></div></div>
+</div>
+<div class="fb" id="feedback"></div>
+<div style="margin-top:14px;display:flex;gap:10px;justify-content:center"><button class="btn bs" id="backToLevels">← مراحل</button><button class="btn bp" id="nextBtn" style="display:none">بعدی →</button></div>
+</div>
+<div class="sc" id="resultScreen">
+<div class="rc"><div class="ri" id="rIcon">🏆</div><h2 id="rTitle"></h2><div class="sts" id="rStars"><span class="st">⭐</span><span class="st">⭐</span><span class="st">⭐</span></div><div class="rs2" id="rScore"></div><p style="color:var(--l);margin-bottom:16px" id="rMsg"></p><div><small style="color:var(--l)">XP</small><div class="xb"><div class="xf" id="xpFill" style="width:0%"></div></div></div><div style="margin-top:22px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><button class="btn bp" id="rToLevels">📚 مراحل</button><button class="btn bs" id="rToHome">🏠 خانه</button></div></div>
+</div>
+</div>
+<footer class="ft"><p>ساخته شده با ❤️ توسط <a href="https://intellsoft.ir" target="_blank">اینتل سافت</a> | <a href="https://intellsoft.ir" target="_blank">intellsoft.ir</a></p><p style="margin-top:5px">در زمان صرفه‌جویی کنید • هر کاری را به آسانی انجام دهید</p></footer>
+<script>
+(function(){
+"use strict";
+
+var L=[
+{c:"مبانی",t:"شروع Bootstrap 5",d:"Get Started, CDN, Installation, History",i:"🚀",q:[
+["quiz","Bootstrap چیست؟","Bootstrap چه نوع فریم‌ورکی است؟","🚀",["Backend","HTML/CSS/JS Frontend","دیتابیس","سرور"],1,"Frontend Framework","فریم‌ورک محبوب HTML، CSS و JavaScript."],
+["quiz","نسخه فعلی","جدیدترین نسخه Bootstrap در این آموزش؟","🚀",["Bootstrap 3","Bootstrap 4","Bootstrap 5","Bootstrap 6"],2,"BS5","Bootstrap 5 جدیدترین نسخه است."],
+["quiz","تفاوت مهم BS5","تفاوت اصلی BS5 با BS4 چیست؟","🚀",["سریع‌تر است","به جای jQuery از JavaScript خالص استفاده می‌کند","رنگ‌های بیشتر","گرید جدید"],1,"Vanilla JS","BS5 دیگر به jQuery وابسته نیست."],
+["quiz","CDN Link","ساده‌ترین روش استفاده از Bootstrap؟","🚀",["دانلود فایل","CDN link در <head>","npm install","کپی دستی"],1,"CDN","استفاده از لینک CDN."],
+["code","CDN CSS","لینک CSS Bootstrap 5 در <head>","🚀","bootstrap.min.css","<link href=\"https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css\" rel=\"stylesheet\">","لینک CSS از CDN.","css/bootstrap.min.css"],
+["quiz","مرورگر پشتیبانی","کدام مرورگر توسط BS5 پشتیبانی نمی‌شود؟","🚀",["Chrome","Firefox","Internet Explorer 11","Safari"],2,"IE11","IE11 و پایین‌تر پشتیبانی نمی‌شود."],
+["quiz","Mobile-First","Bootstrap رویکرد چه نوع طراحی دارد؟","🚀",["Desktop-First","Mobile-First","Tablet-First","هیچکدام"],1,"Mobile-First","اول موبایل، سپس بزرگ‌تر."]
+]},
+{c:"مبانی",t:"Container و ساختار پایه",d:"container, container-fluid, Breakpoints",i:"📦",q:[
+["quiz","Container","کلاس اصلی کانتینر Bootstrap؟","📦",[".box",".container",".wrapper",".main"],1,".container","کلاس پایه برای محتوای متمرکز."],
+["quiz","Container Fluid",".container-fluid چه می‌کند؟","📦",["وسط‌چین","عرض ۱۰۰٪ کل صفحه","حذف","فیکس"],1,"عرض کامل","کانتینر تمام عرض."],
+["quiz","Breakpoints","Bootstrap چند breakpoint دارد؟","📦",["۳","۴","۶","۸"],2,"۶ breakpoint","xs, sm, md, lg, xl, xxl."],
+["quiz","SM breakpoint",".col-sm-* در چه عرضی فعال؟","📦",["۵۷۶px","۷۶۸px","۹۹۲px","۱۲۰۰px"],0,"۵۷۶ پیکسل","Small = 576px."],
+["code","Container","کانتینر Bootstrap با متن Hello","📦","container","<div class=\"container\">Hello</div>",".container برای محتوای وسط‌چین.","container"],
+["quiz","MD breakpoint",".col-md-* در چه عرضی فعال؟","📦",["۵۷۶px","۷۶۸px","۹۹۲px","۱۲۰۰px"],1,"۷۶۸ پیکسل","Medium = 768px."],
+["quiz","LG breakpoint",".col-lg-* در چه عرضی فعال؟","📦",["۷۶۸px","۹۹۲px","۱۲۰۰px","۱۴۰۰px"],1,"۹۹۲ پیکسل","Large = 992px."]
+]},
+{c:"چیدمان",t:"Grid System پایه",d:"row, col, 12-column grid",i:"🔲",q:[
+["quiz","تعداد ستون‌ها","Grid Bootstrap چند ستون دارد؟","🔲",["۶","۸","۱۰","۱۲"],3,"۱۲ ستون","سیستم ۱۲ ستونه."],
+["quiz","Row","کلاس ردیف در grid؟","🔲",[".line",".row",".col",".grid"],1,".row",".row برای ردیف."],
+["quiz","Col","کلاس ستون؟","🔲",[".row",".col",".box",".cell"],1,".col",".col برای ستون."],
+["quiz","Col-6",".col-6 یعنی چه؟","🔲",["۶ پیکسل","۶ ستون از ۱۲","۶٪","فقط موبایل"],1,"نصف عرض","۶ ستون = ۵۰٪ عرض."],
+["code","Grid ساده","ردیف با ۲ ستون مساوی","🔲","row col-6","<div class=\"row\"><div class=\"col-6\">A</div><div class=\"col-6\">B</div></div>","row با col-6.","row col-6"],
+["quiz","Col-12",".col-12 چه می‌کند؟","🔲",["ستون کوچک","تمام عرض","نصف","حذف"],1,"تمام عرض","۱۲ ستون = ۱۰۰٪."],
+["quiz","Auto col",".col بدون عدد؟","🔲",["خطا","عرض مساوی خودکار","۱ ستون","حذف"],1,"خودکار","تقسیم مساوی فضا."]
+]},
+{c:"چیدمان",t:"Grid پیشرفته",d:"Responsive Grid, Offset, Nesting",i:"📐",q:[
+["quiz","Responsive col",".col-md-4 .col-lg-6 یعنی؟","📐",["همیشه 4","در md 4 و در lg 6","فقط lg","خطا"],1,"متغیر با breakpoint","اندازه متفاوت در breakpoint های مختلف."],
+["quiz","Offset",".offset-md-3 چه می‌کند؟","📐",["حذف","۳ ستون فاصله از چپ","پهن‌تر","مخفی"],1,"فاصله از چپ","Offset 3 ستون."],
+["quiz","XXL breakpoint",".col-xxl-* در چه عرضی؟","📐",["۱۲۰۰px","۱۴۰۰px","۱۶۰۰px","۱۸۰۰px"],1,"۱۴۰۰ پیکسل","XXL = 1400px."],
+["quiz","XL breakpoint",".col-xl-* در چه عرضی؟","📐",["۹۹۲px","۱۲۰۰px","۱۴۰۰px","۱۶۰۰px"],1,"۱۲۰۰ پیکسل","XL = 1200px."],
+["code","Responsive","ستون: موبایل 12، تبلت 6، دسکتاپ 4","📐","col-12 col-md-6 col-lg-4","<div class=\"col-12 col-md-6 col-lg-4\">Content</div>","Responsive column.","col-12 col-md-6 col-lg-4"],
+["quiz","Nesting","آیا می‌توان grid را تو در تو کرد؟","📐",["خیر","بله، row داخل col","فقط ۲ سطح","فقط ۱ سطح"],1,"تودرتو","row جدید در col."],
+["quiz","Order",".order-1 چه می‌کند؟","📐",["حذف","تغییر ترتیب نمایش","اندازه","فاصله"],1,"ترتیب","تغییر ترتیب ستون‌ها."]
+]},
+{c:"قالب‌بندی",t:"Typography",d:"Headings, Display, Text utilities",i:"🔤",q:[
+["quiz","Heading 1","کلاس h1 معادل کدام تگ است؟","🔤",["<p>","<h1>","<div>","<span>"],1,"<h1>","h1 = <h1>."],
+["quiz","Display heading",".display-1 برای؟","🔤",["عنوان خیلی بزرگ","متن عادی","لینک","حذف"],0,"عنوان بزرگ","Display headings بزرگ‌تر از heading معمولی."],
+["quiz","Text center",".text-center چه می‌کند؟","🔤",["چپ‌چین","وسط‌چین","راست‌چین","justify"],1,"وسط‌چین","متن وسط."],
+["quiz","Text primary",".text-primary چه رنگی؟","🔤",["قرمز","آبی Bootstrap","سبز","خاکستری"],1,"آبی Bootstrap","رنگ primary = آبی."],
+["code","Heading","عنوان h2 با متن Hello","🔤","h2","<h2>Hello</h2>","<h2> برای عنوان سطح ۲.","h2"],
+["quiz","Lead",".lead برای؟","🔤",["حذف","پاراگراف مقدمه بزرگ","لینک","دکمه"],1,"مقدمه","متن بزرگ‌تر برای مقدمه."],
+["quiz","Text truncate",".text-truncate چه می‌کند؟","🔤",["حذف","متن طولانی با ... کوتاه","وسط‌چین","رنگ"],1,"کوتاه با ...","متن طولانی با ... کوتاه."]
+]},
+{c:"قالب‌بندی",t:"Colors و Backgrounds",d:"Text colors, BG colors, Gradients",i:"🎨",q:[
+["quiz","Primary color",".bg-primary چه رنگی؟","🎨",["قرمز","آبی Bootstrap","سبز","زرد"],1,"آبی","آبی = primary."],
+["quiz","Success color",".bg-success چه رنگی؟","🎨",["آبی","سبز","قرمز","زرد"],1,"سبز","سبز = success."],
+["quiz","Danger color",".text-danger چه رنگی؟","🎨",["آبی","سبز","قرمز","سفید"],2,"قرمز","قرمز = danger."],
+["quiz","Warning color",".bg-warning چه رنگی؟","🎨",["زرد","آبی","قرمز","سبز"],0,"زرد","زرد = warning."],
+["code","Text danger","متن قرمز با .text-danger","🎨","text-danger","<p class=\"text-danger\">Error</p>","text-danger برای متن قرمز.","text-danger"],
+["quiz","Gradient",".bg-gradient برای؟","🎨",["حذف","اضافه کردن گرادیان","رنگ ثابت","شفاف"],1,"گرادیان","افزودن گرادیان."],
+["quiz","Opacity",".bg-opacity-50 چه می‌کند؟","🎨",["حذف","۵۰٪ شفافیت","۵۰٪ بزرگ‌تر","حذف کامل"],1,"شفافیت","۵۰٪ شفاف."]
+]},
+{c:"کامپوننت",t:"Tables",d:"table, striped, bordered, hover, responsive",i:"📋",q:[
+["quiz","Table basic","کلاس پایه جدول؟","📋",[".grid",".table",".list",".data"],1,".table","کلاس .table."],
+["quiz","Striped",".table-striped برای؟","📋",["حذف","ردیف‌های زیبرا","حاشیه","رنگ"],1,"زیبرا","ردیف‌های یک در میان."],
+["quiz","Bordered",".table-bordered چه می‌کند؟","📋",["حذف","حاشیه به همه سلول‌ها","وسط‌چین","شفاف"],1,"حاشیه","حاشیه کامل."],
+["quiz","Hover",".table-hover برای؟","📋",["حذف","هایلایت ردیف با hover","ثابت","حذف"],1,"هایلایت","رنگ با hover."],
+["code","Table striped","جدول Bootstrap با .table-striped","📋","table-striped","<table class=\"table table-striped\">...</table>","جدول با ردیف‌های زیبرا.","table-striped"],
+["quiz","Responsive table",".table-responsive برای؟","📋",["حذف","اسکرول افقی در موبایل","فیکس","حذف"],1,"واکنش‌گرا","اسکرول افقی در صفحات کوچک."],
+["quiz","Dark table",".table-dark چه می‌کند؟","📋",["سفید","جدول تیره","حذف","رنگی"],1,"جدول تیره","پس‌زمینه تیره."]
+]},
+{c:"کامپوننت",t:"Images و Figures",d:"img-fluid, rounded, thumbnail, figure",i:"🖼️",q:[
+["quiz","Responsive image","کلاس تصاویر واکنش‌گرا؟","🖼️",[".img-responsive",".img-fluid",".img-auto",".img-full"],1,".img-fluid",".img-fluid در BS5."],
+["quiz","Rounded",".rounded چه می‌کند؟","🖼️",["دایره","گوشه‌های گرد","مربع","حذف"],1,"گوشه گرد","گوشه‌های گرد."],
+["quiz","Circle",".rounded-circle برای؟","🖼️",["مربع","تصویر دایره‌ای","بیضی","مثلث"],1,"دایره","تصویر دایره‌ای."],
+["quiz","Thumbnail",".img-thumbnail چه می‌کند؟","🖼️",["حذف","حاشیه نازک + padding","سیاه‌وسفید","تار"],1,"thumbnail","حاشیه و فاصله دور تصویر."],
+["code","Rounded image","تصویر دایره‌ای","🖼️","rounded-circle","<img src=\"pic.jpg\" class=\"rounded-circle\">","rounded-circle برای دایره.","rounded-circle"],
+["quiz","Float",".float-end چه می‌کند؟","🖼️",["چپ","راست‌چین","وسط","حذف"],1,"راست","عنصر را به راست می‌برد."],
+["quiz","Figure","<figure> با .figure برای؟","🖼️",["حذف","تصویر با عنوان (caption)","رنگ","انیمیشن"],1,"caption","تصویر با زیرنویس."]
+]},
+{c:"کامپوننت",t:"Alerts و Jumbotron",d:"Alerts, dismissible, Jumbotron",i:"🔔",q:[
+["quiz","Alert basic","کلاس پایه alert؟","🔔",[".message",".alert",".notice",".box"],1,".alert",".alert برای اعلان."],
+["quiz","Success alert",".alert-success چه رنگی؟","🔔",["آبی","سبز","قرمز","زرد"],1,"سبز","موفقیت = سبز."],
+["quiz","Dismissible",".alert-dismissible برای؟","🔔",["حذف","قابل بستن","ثابت","بزرگ"],1,"قابل بستن","با دکمه بسته می‌شود."],
+["quiz","Close button","کلاس دکمه بستن alert؟","🔔",[".close",".btn-close",".x-btn",".remove"],1,".btn-close",".btn-close در BS5."],
+["code","Alert","alert قرمز با پیام Error","🔔","alert-danger","<div class=\"alert alert-danger\">Error</div>",".alert-danger برای خطر.","alert-danger"],
+["quiz","Jumbotron","جایگزین Jumbotron در BS5 چیست؟","🔔",["حذف شده",".bg-light + padding",".hero",".banner"],1,".bg-light + padding","در BS5 Jumbotron وجود ندارد."],
+["quiz","Alert link",".alert-link برای؟","🔔",["حذف","لینک همرنگ alert","لینک قرمز","لینک حذف"],1,"لینک هم‌رنگ","لینک داخل alert."]
+]},
+{c:"کامپوننت",t:"Buttons",d:"btn, btn-primary, outline, sizes, groups",i:"🔘",q:[
+["quiz","Button base","کلاس پایه دکمه؟","🔘",[".button",".btn",".click",".link"],1,".btn",".btn برای دکمه."],
+["quiz","Primary btn",".btn-primary چه رنگی؟","🔘",["قرمز","آبی Bootstrap","سبز","خاکستری"],1,"آبی","primary = آبی."],
+["quiz","Outline btn",".btn-outline-success برای؟","🔘",["پر","دکمه توخالی سبز","حذف","بزرگ"],1,"توخالی","دکمه با حاشیه فقط."],
+["quiz","Large btn",".btn-lg برای؟","🔘",["کوچک","بزرگ","متوسط","عریض"],1,"بزرگ","دکمه بزرگ."],
+["code","Button","دکمه آبی Bootstrap","🔘","btn btn-primary","<button class=\"btn btn-primary\">Click</button>","btn + btn-primary.","btn-primary"],
+["quiz","Block btn","چگونه دکمه تمام‌عرض بسازیم؟","🔘",[".btn-block",".d-block + .w-100",".btn-full",".full"],1,"d-block + w-100","در BS5 .btn-block حذف شده."],
+["quiz","Btn group",".btn-group برای؟","🔘",["حذف","گروه دکمه‌ها کنار هم","بزرگ‌تر","رنگی"],1,"گروه","دکمه‌ها به هم چسبیده."]
+]},
+{c:"کامپوننت",t:"Badges و Breadcrumbs",d:"Badges, Pills, Breadcrumbs",i:"🏷️",q:[
+["quiz","Badge base","کلاس پایه badge؟","🏷️",[".tag",".badge",".label",".chip"],1,".badge",".badge در BS5."],
+["quiz","Pill badge",".rounded-pill برای badge؟","🏷️",["مربع","گوشه گرد کامل (قرصی)","بزرگ","حذف"],1,"قرصی","گوشه‌های کاملاً گرد."],
+["quiz","Badge in button","badge داخل دکمه برای؟","🏷️",["حذف","نمایش عدد (مثل اعلان)","رنگ","انیمیشن"],1,"شمارنده","مثلاً ۵ اعلان."],
+["quiz","Breadcrumb",".breadcrumb برای؟","🏷️",["منو","مسیر ناوبری","دکمه","رنگ"],1,"مسیر","Home > Products > Item."],
+["code","Badge","badge سبز با متن New","🏷️","badge bg-success","<span class=\"badge bg-success\">New</span>",".badge + .bg-success.","badge bg-success"],
+["quiz","Breadcrumb item",".breadcrumb-item برای؟","🏷️",["حذف","هر آیتم breadcrumb","کل مسیر","رنگ"],1,"آیتم","هر بخش مسیر."],
+["quiz","Active breadcrumb",".active در breadcrumb برای؟","🏷️",["حذف","صفحه فعلی","لینک","رنگ"],1,"صفحه فعلی","آیتم جاری."]
+]},
+{c:"کامپوننت",t:"Pagination و Progress",d:"Pagination, Progress Bars",i:"📊",q:[
+["quiz","Pagination",".pagination برای؟","📊",["منو","صفحه‌بندی","رنگ","حذف"],1,"صفحه‌بندی","ناوبری بین صفحات."],
+["quiz","Page item",".page-item برای؟","📊",["حذف","هر صفحه","کل pagination","رنگ"],1,"هر صفحه","آیتم‌های صفحه."],
+["quiz","Progress bar",".progress + .progress-bar برای؟","📊",["حذف","نوار پیشرفت","دکمه","منو"],1,"پیشرفت","نمایش درصد پیشرفت."],
+["quiz","Progress width","style=\"width: 70%\" برای progress؟","📊",["رنگ","۷۰٪ پر","حذف","اندازه متن"],1,"۷۰٪ پر","درصد پیشرفت."],
+["code","Progress","نوار پیشرفت سبز ۵۰٪","📊","progress-bar bg-success","<div class=\"progress\"><div class=\"progress-bar bg-success\" style=\"width:50%\"></div></div>","progress-bar با width.","progress-bar bg-success"],
+["quiz","Striped progress",".progress-bar-striped برای؟","📊",["حذف","خطوط راه‌راه","رنگ ثابت","انیمیشن"],1,"راه‌راه","الگوی راه‌راه."],
+["quiz","Animated progress",".progress-bar-animated برای؟","📊",["ثابت","انیمیشن متحرک","حذف","کوچک"],1,"متحرک","انیمیشن حرکت."]
+]},
+{c:"کامپوننت",t:"List Groups",d:"List Group, Flush, Links, Badges",i:"📝",q:[
+["quiz","List group",".list-group برای؟","📝",["جدول","گروه لیست","منو","رنگ"],1,"لیست","گروه آیتم‌ها."],
+["quiz","List item",".list-group-item برای؟","📝",["حذف","هر آیتم لیست","کل لیست","رنگ"],1,"آیتم","هر آیتم."],
+["quiz","Flush",".list-group-flush برای؟","📝",["حذف","بدون حاشیه","ضخیم‌تر","رنگی"],1,"بدون حاشیه","حاشیه‌های خارجی حذف."],
+["quiz","Active",".active در list item؟","📝",["حذف","آیتم انتخاب شده","مخفی","کوچک"],1,"انتخاب شده","آیتم فعال."],
+["code","List group","لیست ۲ آیتمی ساده","📝","list-group list-group-item","<ul class=\"list-group\"><li class=\"list-group-item\">A</li><li class=\"list-group-item\">B</li></ul>","ul با list-group.","list-group"],
+["quiz","Action item",".list-group-item-action برای؟","📝",["حذف","آیتم قابل کلیک","رنگی","بزرگ"],1,"قابل کلیک","hover و کلیک."],
+["quiz","Badge in list","badge در list item برای؟","📝",["حذف","شمارنده کنار آیتم","رنگ","انیمیشن"],1,"شمارنده","مثلاً ۱۴ پیام."]
+]},
+{c:"کامپوننت",t:"Cards",d:"Card, Body, Header, Footer, Images",i:"🃏",q:[
+["quiz","Card base","کلاس پایه کارت؟","🃏",[".box",".card",".panel",".tile"],1,".card",".card برای کارت."],
+["quiz","Card body",".card-body برای؟","🃏",["حذف","محتوای کارت","تصویر","عنوان"],1,"محتوا","پدینگ داخلی کارت."],
+["quiz","Card title",".card-title برای؟","🃏",["حذف","عنوان کارت","لینک","دکمه"],1,"عنوان","عنوان داخل کارت."],
+["quiz","Card image",".card-img-top برای؟","🃏",["حذف","تصویر بالای کارت","تصویر پایین","آیکون"],1,"بالای کارت","تصویر بالا."],
+["code","Card simple","کارت با body و عنوان","🃏","card card-body card-title","<div class=\"card\"><div class=\"card-body\"><h5 class=\"card-title\">Title</h5></div></div>","card با body و title.","card card-body"],
+["quiz","Card footer",".card-footer برای؟","🃏",["حذف","بخش پایین کارت","بالای کارت","وسط"],1,"پایین کارت","بخش پایانی."],
+["quiz","Card group",".card-group برای؟","🃏",["حذف","کارت‌های به هم چسبیده","جدا","رنگی"],1,"چسبیده","کارت‌ها با هم."]
+]},
+{c:"کامپوننت",t:"Dropdowns",d:"Dropdown, Dropup, Split, Menu items",i:"⬇️",q:[
+["quiz","Dropdown base",".dropdown برای؟","⬇️",["منو","منوی کشویی","رنگ","حذف"],1,"کشویی","منوی بازشو."],
+["quiz","Toggle",".dropdown-toggle برای؟","⬇️",["حذف","دکمه بازکننده","منو","آیتم"],1,"دکمه","دکمه فعال‌سازی."],
+["quiz","Menu",".dropdown-menu برای؟","⬇️",["حذف","محتوای منو","دکمه","رنگ"],1,"منو","محتوای کشویی."],
+["quiz","Item",".dropdown-item برای؟","⬇️",["حذف","آیتم‌های منو","دکمه","رنگ"],1,"آیتم","هر آیتم منو."],
+["code","Dropdown","منوی کشویی با ۲ آیتم","⬇️","dropdown dropdown-menu dropdown-item","<div class=\"dropdown\"><button class=\"dropdown-toggle\" data-bs-toggle=\"dropdown\">Menu</button><ul class=\"dropdown-menu\"><li><a class=\"dropdown-item\">A</a></li></ul></div>","dropdown کامل.","dropdown-menu"],
+["quiz","Dropup",".dropup برای؟","⬇️",["پایین","باز شدن به بالا","چپ","راست"],1,"به بالا","منو باز می‌شود به بالا."],
+["quiz","Divider",".dropdown-divider برای؟","⬇️",["حذف","خط جداکننده","رنگ","آیتم"],1,"جداکننده","خط بین آیتم‌ها."]
+]},
+{c:"کامپوننت",t:"Collapse و Accordion",d:"Collapse, Accordion, Toggle",i:"🔽",q:[
+["quiz","Collapse",".collapse برای؟","🔽",["حذف","محتوای قابل باز/بسته","رنگ","ثابت"],1,"باز/بسته","محتوای مخفی/نمایان."],
+["quiz","Show",".show در collapse برای؟","🔽",["مخفی","نمایش باز","حذف","کوچک"],1,"باز","در حالت باز."],
+["quiz","Accordion",".accordion برای؟","🔽",["حذف","چند collapse گروهی","رنگ","ثابت"],1,"آکاردئون","چند بخش قابل باز."],
+["quiz","Accordion item",".accordion-item برای؟","🔽",["حذف","هر بخش","کل","رنگ"],1,"هر بخش","هر آیتم."],
+["code","Collapse","دکمه toggle با content","🔽","collapse","<button data-bs-toggle=\"collapse\" data-bs-target=\"#c1\">Toggle</button><div id=\"c1\" class=\"collapse\">Content</div>","collapse با data-bs-toggle.","data-bs-toggle collapse"],
+["quiz","Accordion header",".accordion-header برای؟","🔽",["حذف","عنوان هر بخش","محتوا","دکمه"],1,"عنوان","عنوان قابل کلیک."],
+["quiz","Data attribute","data-bs-toggle=\"collapse\" برای؟","🔽",["حذف","فعال‌سازی JS","رنگ","اندازه"],1,"فعال JS","فعال‌سازی JavaScript."]
+]},
+{c:"ناوبری",t:"Navs و Navbar",d:"Nav, Nav-tabs, Navbar, Responsive",i:"🧭",q:[
+["quiz","Nav base",".nav برای؟","🧭",["منو","پایه ناوبری","دکمه","رنگ"],1,"پایه","پایه منو."],
+["quiz","Nav tabs",".nav-tabs برای؟","🧭",["حذف","منوی تب‌دار","رنگ","ثابت"],1,"تب","منو با تب‌ها."],
+["quiz","Nav pills",".nav-pills برای؟","🧭",["حذف","منوی قرصی","خط","رنگ"],1,"قرصی","منو با پس‌زمینه."],
+["quiz","Navbar",".navbar برای؟","🧭",["حذف","نوار بالا واکنش‌گرا","دکمه","رنگ"],1,"نوار بالا","نوار ناوبری اصلی."],
+["code","Navbar","navbar تیره","🧭","navbar navbar-dark bg-dark","<nav class=\"navbar navbar-dark bg-dark\">...</nav>","navbar با تم تیره.","navbar navbar-dark bg-dark"],
+["quiz","Toggler",".navbar-toggler برای؟","🧭",["حذف","دکمه همبرگری موبایل","رنگ","اندازه"],1,"همبرگر","منو در موبایل."],
+["quiz","Nav link",".nav-link برای؟","🧭",["حذف","لینک‌های منو","رنگ","دکمه"],1,"لینک","آیتم‌های منو."]
+]},
+{c:"فرم",t:"Forms پایه",d:"Form control, Labels, Validation",i:"📋",q:[
+["quiz","Form control",".form-control برای؟","📋",["دکمه","input, textarea, select","لیبل","رنگ"],1,"ورودی","کلاس input و textarea."],
+["quiz","Label",".form-label برای؟","📋",["حذف","لیبل input","رنگ","دکمه"],1,"لیبل","برچسب ورودی."],
+["quiz","Select","<select> با .form-select برای؟","📋",["حذف","منوی کشویی","رنگ","دکمه"],1,"کشویی","select با استایل."],
+["quiz","Check",".form-check برای؟","📋",["حذف","checkbox و radio","رنگ","دکمه"],1,"چک و رادیو","checkbox/radio با استایل."],
+["code","Input","input متن با لیبل","📋","form-control form-label","<label class=\"form-label\">Name</label><input type=\"text\" class=\"form-control\">","form-label + form-control.","form-control"],
+["quiz","Validation",".is-valid برای؟","📋",["خطا","سبز (معتبر)","قرمز","حذف"],1,"سبز","input معتبر."],
+["quiz","Invalid",".is-invalid برای؟","📋",["سبز","قرمز (نامعتبر)","آبی","حذف"],1,"قرمز","input نامعتبر."]
+]},
+{c:"فرم",t:"Input Groups و Range",d:"Input Group, Range, Switch",i:"🎛️",q:[
+["quiz","Input group",".input-group برای؟","🎛️",["حذف","افزودن آیکون/متن به input","رنگ","دکمه"],1,"گروه","ترکیب با input."],
+["quiz","Addon",".input-group-text برای؟","🎛️",["حذف","متن/آیکون کنار input","رنگ","دکمه"],1,"addon","بخش اضافی."],
+["quiz","Range",".form-range برای؟","🎛️",["حذف","اسلایدر","متن","چک"],1,"اسلایدر","input range."],
+["quiz","Switch",".form-switch برای؟","🎛️",["حذف","تبدیل checkbox به سوییچ","رنگ","اندازه"],1,"سوییچ","toggle switch."],
+["code","Input group","input با $ قبل","🎛️","input-group input-group-text","<div class=\"input-group\"><span class=\"input-group-text\">$</span><input class=\"form-control\"></div>","input-group با addon.","input-group"],
+["quiz","Floating label",".form-floating برای؟","🎛️",["حذف","لیبل شناور داخل input","رنگ","اندازه"],1,"شناور","لیبل متحرک."],
+["quiz","Size",".form-control-lg برای؟","🎛️",["کوچک","بزرگ","متوسط","حذف"],1,"بزرگ","input بزرگ."]
+]},
+{c:"پیشرفته",t:"Carousel",d:"Carousel, Slides, Controls, Indicators",i:"🎠",q:[
+["quiz","Carousel base",".carousel برای؟","🎠",["حذف","اسلایدر تصاویر","منو","رنگ"],1,"اسلایدر","نمایش اسلاید."],
+["quiz","Slide",".carousel-item برای؟","🎠",["حذف","هر اسلاید","کنترل","رنگ"],1,"اسلاید","هر اسلاید."],
+["quiz","Active slide",".active در carousel-item برای؟","🎠",["حذف","اسلاید فعلی","مخفی","ثابت"],1,"فعلی","اسلاید نمایشی."],
+["quiz","Controls",".carousel-control-prev برای؟","🎠",["بعدی","دکمه قبلی","حذف","رنگ"],1,"قبلی","دکمه ◀."],
+["code","Carousel","carousel با ۲ اسلاید","🎠","carousel carousel-item","<div id=\"c\" class=\"carousel slide\"><div class=\"carousel-inner\"><div class=\"carousel-item active\">1</div><div class=\"carousel-item\">2</div></div></div>","carousel ساده.","carousel-item active"],
+["quiz","Indicators",".carousel-indicators برای؟","🎠",["حذف","نقطه‌های ناوبری","رنگ","اندازه"],1,"نقطه‌ها","نشانگر اسلاید."],
+["quiz","Fade",".carousel-fade برای؟","🎠",["سریع","انتقال محو","حذف","کند"],1,"محو","افکت fade."]
+]},
+{c:"پیشرفته",t:"Modal و Tooltip",d:"Modal, Tooltip, Popover",i:"🪟",q:[
+["quiz","Modal",".modal برای؟","🪟",["حذف","پنجره modal","رنگ","دکمه"],1,"modal","پنجره popup."],
+["quiz","Dialog",".modal-dialog برای؟","🪟",["حذف","محتوای modal","رنگ","دکمه"],1,"dialog","جعبه modal."],
+["quiz","Content",".modal-content برای؟","🪟",["حذف","محتوای داخلی","دکمه","رنگ"],1,"محتوا","داخل modal."],
+["quiz","Tooltip","data-bs-toggle=\"tooltip\" برای؟","🪟",["حذف","نمایش tooltip","modal","popover"],1,"tooltip","راهنمای hover."],
+["code","Tooltip","دکمه با tooltip","🪟","data-bs-toggle tooltip","<button data-bs-toggle=\"tooltip\" title=\"Hello\">Hover</button>","tooltip با data-bs-toggle.","data-bs-toggle tooltip"],
+["quiz","Popover","data-bs-toggle=\"popover\" برای؟","🪟",["حذف","popover (بزرگ‌تر از tooltip)","modal","carousel"],1,"popover","حباب اطلاعاتی."],
+["quiz","Large modal",".modal-lg برای؟","🪟",["کوچک","بزرگ","متوسط","حذف"],1,"بزرگ","modal بزرگ."]
+]},
+{c:"پیشرفته",t:"Offcanvas و Scrollspy",d:"Offcanvas, Scrollspy, Toasts",i:"🎯",q:[
+["quiz","Offcanvas",".offcanvas برای؟","🎯",["حذف","پنل کناری بازشو","modal","dropdown"],1,"پنل کناری","Sidebar slide-in."],
+["quiz","Offcanvas start",".offcanvas-start برای؟","🎯",["راست","از چپ باز می‌شود","بالا","پایین"],1,"از چپ","Slide از چپ."],
+["quiz","Scrollspy","data-bs-spy=\"scroll\" برای؟","🎯",["حذف","هایلایت منو با اسکرول","modal","carousel"],1,"اسکرول","منوی خودکار."],
+["quiz","Toast",".toast برای؟","🎯",["حذف","پیام موقت","modal","popover"],1,"Toast","اعلان موقت."],
+["code","Offcanvas","offcanvas چپ","🎯","offcanvas offcanvas-start","<div class=\"offcanvas offcanvas-start\">...</div>","offcanvas از چپ.","offcanvas offcanvas-start"],
+["quiz","Offcanvas end",".offcanvas-end برای؟","🎯",["چپ","از راست باز می‌شود","بالا","پایین"],1,"از راست","Slide از راست."],
+["quiz","Toast header",".toast-header برای؟","🎯",["حذف","سربرگ toast","محتوا","بدنه"],1,"سربرگ","عنوان toast."]
+]},
+{c:"ابزارها",t:"Spacing و Sizing",d:"Margin, Padding, Width, Height",i:"📏",q:[
+["quiz","Margin",".m-3 برای؟","📏",["padding","margin 3","border","color"],1,"margin 3","margin همه طرف 1rem."],
+["quiz","Padding",".p-2 برای؟","📏",["margin","padding 2","border","color"],1,"padding 2","padding همه طرف 0.5rem."],
+["quiz","Margin top",".mt-4 برای؟","📏",["پایین","margin بالا 4","چپ","راست"],1,"بالا","margin-top."],
+["quiz","Padding X",".px-3 برای؟","📏",["عمودی","padding چپ و راست 3","بالا","پایین"],1,"افقی","padding-x."],
+["code","Spacing","div با margin 3 و padding 2","📏","m-3 p-2","<div class=\"m-3 p-2\">Content</div>","m-3 + p-2.","m-3 p-2"],
+["quiz","Width 100",".w-100 برای؟","📏",["نصف","عرض ۱۰۰٪","۵۰٪","حذف"],1,"تمام عرض","width 100%."],
+["quiz","Height 50",".h-50 برای؟","📏",["۱۰۰٪","ارتفاع ۵۰٪","۲۵٪","حذف"],1,"نصف ارتفاع","height 50%."]
+]},
+{c:"ابزارها",t:"Flex و Alignment",d:"d-flex, justify, align, order",i:"🧲",q:[
+["quiz","Flex",".d-flex برای؟","🧲",["block","display: flex","inline","none"],1,"flex","فعال‌سازی flexbox."],
+["quiz","Justify center",".justify-content-center برای؟","🧲",["عمودی","وسط‌چین افقی","راست","چپ"],1,"وسط افقی","محور اصلی وسط."],
+["quiz","Align center",".align-items-center برای؟","🧲",["افقی","وسط‌چین عمودی","بالا","پایین"],1,"وسط عمودی","محور عمودی وسط."],
+["quiz","Column",".flex-column برای؟","🧲",["افقی","عمودی","معکوس","حذف"],1,"عمودی","جهت ستونی."],
+["code","Flex center","div با فرزند وسط","🧲","d-flex justify-content-center align-items-center","<div class=\"d-flex justify-content-center align-items-center\">...</div>","flex center.","d-flex justify-content-center"],
+["quiz","Space between",".justify-content-between برای؟","🧲",["وسط","فضا بین آیتم‌ها","راست","چپ"],1,"بین آیتم‌ها","فضا بین."],
+["quiz","Wrap",".flex-wrap برای؟","🧲",["خط جدید","شکستن به خط بعد","حذف","ثابت"],1,"شکستن","Wrap به خط بعد."]
+]},
+{c:"ابزارها",t:"Display و Visibility",d:"d-none, d-block, d-md-none",i:"👁️",q:[
+["quiz","Hide",".d-none برای؟","👁️",["نمایش","مخفی کردن","رنگ","اندازه"],1,"مخفی","display: none."],
+["quiz","Block",".d-block برای؟","👁️",["inline","display: block","flex","grid"],1,"block","display: block."],
+["quiz","Responsive hide",".d-md-none برای؟","👁️",["همیشه مخفی","در md+ مخفی","فقط موبایل","حذف"],1,"در md مخفی","در md و بالاتر مخفی."],
+["quiz","Only mobile",".d-block .d-md-none برای؟","👁️",["همه","فقط موبایل","فقط دسکتاپ","حذف"],1,"فقط موبایل","نمایش در موبایل."],
+["code","Hide mobile","مخفی در موبایل","👁️","d-none d-md-block","<div class=\"d-none d-md-block\">Desktop only</div>","d-none d-md-block.","d-none d-md-block"],
+["quiz","Visibility",".invisible برای؟","👁️",["حذف","مخفی ولی فضا اشغال","نمایش","رنگ"],1,"نامرئی","فضا حفظ می‌شود."],
+["quiz","Visible",".visible برای؟","👁️",["مخفی","نمایش","حذف","رنگ"],1,"نمایش","visibility: visible."]
+]},
+{c:"آیکون",t:"Bootstrap Icons و Utilities",d:"Icons, Shadows, Rounded, Borders",i:"✨",q:[
+["quiz","Icons","آیکون‌های Bootstrap از کجا؟","✨",["Font Awesome","Bootstrap Icons","Glyphicons","Material"],1,"Bootstrap Icons","کتابخانه رسمی Bootstrap."],
+["quiz","Icon class","bi-heart برای؟","✨",["دایره","آیکون قلب","ستاره","خانه"],1,"قلب","آیکون قلب."],
+["quiz","Shadow",".shadow برای؟","✨",["حذف","سایه متوسط","رنگ","بزرگ"],1,"سایه","box-shadow."],
+["quiz","Rounded",".rounded-3 برای؟","✨",["مربع","گوشه گرد بزرگ","دایره","حذف"],1,"گرد بزرگ","گوشه گرد بزرگ."],
+["code","Icon","آیکون قلب","✨","bi bi-heart","<i class=\"bi bi-heart\"></i>","bi-heart آیکون قلب.","bi-heart"],
+["quiz","Border",".border برای؟","✨",["حذف","حاشیه","رنگ","سایه"],1,"حاشیه","border ساده."],
+["quiz","Text muted",".text-muted برای؟","✨",["رنگی","متن کم‌رنگ","ضخیم","کج"],1,"کم‌رنگ","متن خاکستری."]
+]},
+{c:"مرور",t:"آزمون جامع Bootstrap 5",d:"ترکیبی از تمام مباحث",i:"🏆",q:[
+["quiz","Container",".container vs .container-fluid؟","🏆",["فرق ندارند","container وسط‌چین، fluid تمام‌عرض","container بزرگ‌تر","fluid حذف شده"],1,"وسط vs تمام","container محدود، fluid ۱۰۰٪."],
+["quiz","Grid","۱۲ ستون = چند درصد؟","🏆",["۵۰٪","۱۰۰٪","۲۵٪","۱۲٪"],1,"۱۰۰٪","۱۲ ستون = تمام عرض."],
+["quiz","BS5 vs BS4","تفاوت اصلی BS5؟","🏆",["jQuery","Vanilla JavaScript","رنگ بیشتر","فونت جدید"],1,"Vanilla JS","jQuery حذف شده."],
+["quiz","Button","btn + btn-primary + btn-lg = ؟","🏆",["کوچک","دکمه بزرگ آبی","حذف","رنگی"],1,"بزرگ آبی","دکمه primary بزرگ."],
+["quiz","Alert",".alert-danger برای؟","🏆",["آبی","قرمز (خطر)","سبز","زرد"],1,"قرمز","خطر = قرمز."],
+["quiz","Responsive",".col-md-6 .col-lg-4 یعنی؟","🏆",["همیشه 6","md=6 و lg=4","lg=6","حذف"],1,"md=6 lg=4","اندازه متفاوت با breakpoint."],
+["quiz","Flex",".d-flex .justify-content-between = ؟","🏆",["وسط","فاصله مساوی بین آیتم‌ها","راست","حذف"],1,"فاصله بین","space-between."]
+]}
+];
+
+var SK='bsQ4_';
+var gs={cl:0,cc:0,sc:0,ts:0,st:0,lp:{},ans:false,sel:-1};
+function load(){try{gs.ts=parseInt(localStorage.getItem(SK+'s'))||0;gs.st=parseInt(localStorage.getItem(SK+'st'))||0;gs.lp=JSON.parse(localStorage.getItem(SK+'p'))||{};var lv=localStorage.getItem(SK+'lv')||'';var today=new Date().toDateString();if(lv!==today){var yest=new Date(Date.now()-86400000).toDateString();if(lv===yest)gs.st++;else if(lv!=='')gs.st=1;localStorage.setItem(SK+'st',gs.st);localStorage.setItem(SK+'lv',today);}}catch(e){}}
+function save(){try{localStorage.setItem(SK+'s',gs.ts);localStorage.setItem(SK+'st',gs.st);localStorage.setItem(SK+'p',JSON.stringify(gs.lp));localStorage.setItem(SK+'lv',new Date().toDateString());}catch(e){}}
+function resetAll(){if(confirm('آیا مطمئن هستید؟ تمام پیشرفت پاک خواهد شد.')){try{localStorage.removeItem(SK+'s');localStorage.removeItem(SK+'st');localStorage.removeItem(SK+'p');localStorage.removeItem(SK+'lv');}catch(e){}gs.ts=0;gs.st=0;gs.lp={};uS();rL();tst('پیشرفت پاک شد');}}
+
+var E={};
+function cD(){var ids=['particles','toast','confetti','totalScore','streak','badge','doneCount','welcomeStats','levelsContainer','levelProgressText','chCounter','gpf','chBadge','chTitle','chDesc','hintBox','quizArea','codeEditor','demoBox','feedback','submitBtn','nextBtn','rIcon','rTitle','rStars','rScore','rMsg','xpFill','chInfo'];for(var i=0;i<ids.length;i++)E[ids[i]]=document.getElementById(ids[i]);}
+function show(n){var s=document.querySelectorAll('.sc');for(var i=0;i<s.length;i++)s[i].classList.remove('active');document.getElementById(n).classList.add('active');if(n==='levelScreen')rL();if(n==='welcomeScreen')wS();}
+function cP(){for(var i=0;i<20;i++){var p=document.createElement('div');p.className='pt';p.style.left=Math.random()*100+'%';p.style.animationDuration=(Math.random()*10+10)+'s';p.style.animationDelay=(Math.random()*10)+'s';var s=(Math.random()*4+2)+'px';p.style.width=s;p.style.height=s;E.particles.appendChild(p);}}
+function uS(){E.totalScore.textContent=gs.ts;E.streak.textContent=gs.st;var dc=0;for(var k in gs.lp){if(gs.lp[k]>=80)dc++;}E.doneCount.textContent=dc;E.badge.textContent=gs.ts>=800?'استاد Bootstrap':gs.ts>=400?'حرفه‌ای':gs.ts>=150?'متوسط':'مبتدی';}
+function wS(){var dc=0,tp=0;for(var k in gs.lp){if(gs.lp[k]>=80)dc++;tp+=gs.lp[k];}var avg=L.length?Math.round(tp/L.length):0;E.welcomeStats.innerHTML='<div class="stat-card"><div class="num">'+gs.ts+'</div><div class="lbl">امتیاز کل</div></div><div class="stat-card"><div class="num">'+dc+'/25</div><div class="lbl">مراحل تکمیل</div></div><div class="stat-card"><div class="num">'+gs.st+'</div><div class="lbl">روز متوالی</div></div><div class="stat-card"><div class="num">'+avg+'%</div><div class="lbl">میانگین پیشرفت</div></div>';}
+function rL(){E.levelsContainer.innerHTML='';var dc=0;for(var k in gs.lp){if(gs.lp[k]>=80)dc++;}E.levelProgressText.textContent=dc+' از 25 مرحله تکمیل شده';var cats={};for(var i=0;i<L.length;i++){var l=L[i];if(!cats[l.c])cats[l.c]=[];cats[l.c].push({l:l,i:i});}for(var c in cats){var d=document.createElement('div');d.innerHTML='<div class="lcat">📂 '+c+'</div>';var g=document.createElement('div');g.className='lg2';for(var j=0;j<cats[c].length;j++){(function(it){var lv=it.l,idx=it.i;var pr=gs.lp[idx]||0;var lk=idx>0&&(gs.lp[idx-1]||0)<30;var dn=pr>=80;var cd=document.createElement('div');cd.className='lc'+(lk?' lk':'')+(dn?' done':'');cd.innerHTML='<div class="ln">'+(lk?'🔒':lv.i)+'</div><h3>'+lv.t+'</h3><p>'+lv.d+'</p><div class="lp"><div class="lpb" style="width:'+pr+'%"></div></div><small style="color:var(--l);opacity:.6;margin-top:5px;display:block">'+(dn?'✅ تکمیل':pr+'%')+' • '+lv.q.length+' چالش</small>';if(!lk)cd.addEventListener('click',function(){sL(idx);});g.appendChild(cd);})(cats[c][j]);}d.appendChild(g);E.levelsContainer.appendChild(d);}}
+function sL(i){gs.cl=i;gs.cc=0;gs.sc=0;gs.ans=false;gs.sel=-1;show('gameScreen');lC();}
+function lC(){
+    var lv=L[gs.cl];var ch=lv.q[gs.cc];gs.ans=false;gs.sel=-1;
+    var t=lv.q.length,c=gs.cc+1;
+    E.chCounter.textContent='چالش '+c+' از '+t;
+    E.gpf.style.width=((c/t)*100)+'%';
+    E.chBadge.textContent=ch[3]+' '+lv.t;
+    E.chTitle.textContent=ch[1];
+    E.chDesc.textContent=ch[2];
+    var hintText=(ch[0]==='quiz')?ch[6]:ch[5];
+    E.hintBox.textContent='💡 '+hintText;
+    E.hintBox.classList.remove('show');
+    E.feedback.className='fb';
+    E.nextBtn.style.display='none';
+    E.submitBtn.style.display='';
+    if(ch[0]==='quiz'){
+        E.quizArea.style.display='block';E.codeEditor.style.display='none';
+        var h='<div class="qo">';
+        for(var i=0;i<ch[4].length;i++)h+='<div class="qop" data-i="'+i+'">'+ch[4][i]+'</div>';
+        h+='</div>';E.quizArea.innerHTML=h;
+        var ops=E.quizArea.querySelectorAll('.qop');
+        for(var j=0;j<ops.length;j++){(function(o){o.addEventListener('click',function(){if(gs.ans)return;var a=E.quizArea.querySelectorAll('.qop');for(var k=0;k<a.length;k++)a[k].classList.remove('sel');o.classList.add('sel');gs.sel=parseInt(o.getAttribute('data-i'));});})(ops[j]);}
+    }else{
+        E.quizArea.style.display='none';E.codeEditor.style.display='block';
+        E.codeEditor.value='';E.codeEditor.placeholder=ch[5];
+    }
+    rP();
+}
+function rP(){E.demoBox.textContent='BS5';E.demoBox.style.cssText='padding:10px 20px;background:#7952b3;color:white;font-weight:bold;border-radius:8px;transition:all .3s;font-size:.9rem;';}
+
+function chk(){
+    if(gs.ans)return;
+    var lv=L[gs.cl];var ch=lv.q[gs.cc];var ok=false;var explanation='';
+    if(ch[0]==='quiz'){
+        if(gs.sel===-1){tst('⚠️ یک گزینه انتخاب کنید');return;}
+        var correctIndex=ch[5];ok=(gs.sel===correctIndex);explanation=ch[7];
+        var ops=E.quizArea.querySelectorAll('.qop');
+        for(var i=0;i<ops.length;i++){ops[i].classList.add('dis');if(i===correctIndex)ops[i].classList.add('cor');if(i===gs.sel&&!ok)ops[i].classList.add('wrg');}
+    }else{
+        var code=E.codeEditor.value.toLowerCase().trim();
+        ok=code.indexOf(ch[4].toLowerCase())!==-1;explanation=ch[6];
+        if(ok&&ch[7]){E.demoBox.textContent=ch[7];E.demoBox.style.cssText='padding:10px 20px;background:#198754;color:white;font-weight:bold;border-radius:8px;transition:all .3s;font-size:.85rem;';}
+    }
+    gs.ans=true;E.submitBtn.style.display='none';
+    if(ok){gs.sc+=20;gs.ts+=20;save();uS();E.feedback.className='fb suc show';E.feedback.innerHTML='✅ آفرین! پاسخ صحیح.<br><small>'+explanation+'</small>';mC();}
+    else{E.feedback.className='fb err show';E.feedback.innerHTML='❌ پاسخ نادرست!<br><small>'+explanation+'</small>';E.chInfo.classList.add('shk');setTimeout(function(){E.chInfo.classList.remove('shk');},400);}
+    E.nextBtn.style.display='';
+}
+
+function nxt(){var lv=L[gs.cl];gs.cc++;if(gs.cc>=lv.q.length)fin();else lC();}
+function fin(){var lv=L[gs.cl];var mx=lv.q.length*20;var pc=Math.round((gs.sc/mx)*100);gs.lp[gs.cl]=Math.max(gs.lp[gs.cl]||0,pc);save();uS();show('resultScreen');var st=pc>=80?3:pc>=50?2:pc>=20?1:0;var se=E.rStars.querySelectorAll('.st');for(var i=0;i<se.length;i++){if(i<st)se[i].classList.add('ea');else se[i].classList.remove('ea');}E.rScore.textContent=gs.sc+' امتیاز';E.rIcon.textContent=pc>=80?'🏆':pc>=50?'🎉':'💪';E.rTitle.textContent=pc>=80?'عالی!':pc>=50?'خوب!':'ادامه بده!';E.rMsg.textContent=pc+'% از "'+lv.t+'" ('+lv.q.length+' چالش)';E.xpFill.style.width='0%';setTimeout(function(){E.xpFill.style.width=pc+'%';},300);if(pc>=80)setTimeout(bC,500);}
+function tst(m){E.toast.textContent=m;E.toast.classList.add('show');setTimeout(function(){E.toast.classList.remove('show');},2500);}
+function bC(){E.confetti.innerHTML='';var c=['#7952b3','#0d6efd','#ffc107','#198754','#dc3545','#bd93f9'];for(var i=0;i<50;i++){var p=document.createElement('div');p.className='cp';p.style.left=Math.random()*100+'%';p.style.background=c[Math.floor(Math.random()*c.length)];p.style.animationDelay=Math.random()*2+'s';p.style.borderRadius=Math.random()>.5?'50%':'0';var s=(Math.random()*8+5)+'px';p.style.width=s;p.style.height=s;E.confetti.appendChild(p);}setTimeout(function(){E.confetti.innerHTML='';},4000);}
+function mC(){E.confetti.innerHTML='';var c=['#198754','#0d6efd','#7952b3'];for(var i=0;i<12;i++){var p=document.createElement('div');p.className='cp';p.style.left=(40+Math.random()*20)+'%';p.style.background=c[Math.floor(Math.random()*c.length)];p.style.animationDelay=Math.random()*.5+'s';p.style.width='6px';p.style.height='6px';E.confetti.appendChild(p);}setTimeout(function(){E.confetti.innerHTML='';},3000);}
+function bE(){
+document.getElementById('startBtn').addEventListener('click',function(){show('levelScreen');});
+document.getElementById('backToWelcome').addEventListener('click',function(){show('welcomeScreen');});
+document.getElementById('hintBtn').addEventListener('click',function(){E.hintBox.classList.add('show');});
+document.getElementById('submitBtn').addEventListener('click',chk);
+document.getElementById('nextBtn').addEventListener('click',nxt);
+document.getElementById('backToLevels').addEventListener('click',function(){show('levelScreen');});
+document.getElementById('rToLevels').addEventListener('click',function(){show('levelScreen');});
+document.getElementById('rToHome').addEventListener('click',function(){show('welcomeScreen');});
+document.getElementById('resetBtn').addEventListener('click',resetAll);
+}
+function init(){cD();cP();load();uS();wS();rL();bE();}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
+})();
+</script>
+</body>
+</html>
