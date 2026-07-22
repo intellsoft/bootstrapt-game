@@ -15,7 +15,7 @@
 
 <br>
 
-[🌐 دمو آنلاین](https://intellsoft-ir.github.io/bootstrap-quest/) • 
+[🌐 دمو آنلاین](https://intellsoft.github.io/bootstrapt-game/) • 
 [🏢 اینتل سافت](https://intellsoft.ir)
 
 </div>
